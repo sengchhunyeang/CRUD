@@ -31,6 +31,22 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
+This app auto-deploys from GitHub (`sengchhunyeang/CRUD`):
+
+- Push to `main` → production deployment.
+- Push to any other branch / open a PR → preview deployment.
+
+One-time setup:
+
+1. Run `npm run db:setup` locally once to create the tables (uses `DATABASE_URL` from `.env.local`).
+2. In [vercel.com/new](https://vercel.com/new), import the `CRUD` GitHub repo (framework: Next.js, defaults are fine).
+3. Add these Environment Variables (Production + Preview) before deploying:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+
+   `DATABASE_URL` is **not** needed on Vercel — it is only used by the local `db:setup` script.
+4. Deploy. Check `/api/health` on the deployed URL — it should return `"status":"connected"`.
+
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
